@@ -13,9 +13,27 @@
 
 // JSX   -- There should be only one parent element   
 // Use empty fragment or React.fragment for wrapping
-const jsxHeading =  <>
-                        <h1 className="head">Hello JSX!</h1>
-                        <p>This is JSX paragraph</p>
-                    </>
+// const jsxHeading =  <>
+//                         <h1 className="head">Hello JSX!</h1>
+//                         <p>This is JSX paragraph</p>
+//                     </>
+// ReactDOM.createRoot(document.getElementById("root")).render(jsxHeading);
 
-ReactDOM.createRoot(document.getElementById("root")).render(jsxHeading);
+
+// React Components- functional and class
+// If we use arrow function without curly braces {} then we don't need to explicitely return 
+const ArrowFunc=()=>(
+    <>
+        <p>This is an Arrow function</p>
+    </>
+)
+function App(){
+    return(
+        <>
+            <h1 className="head">Hello JSX!</h1>
+            <p>This is JSX paragraph</p>
+            <ArrowFunc />
+        </>
+    )
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
