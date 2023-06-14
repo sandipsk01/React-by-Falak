@@ -15,19 +15,29 @@
         function App(){  
 
             var arr=[1,2,3,4];
-
+            
             var obj={
                 name:"Alexa",
                 age:2
             };
             
-            
+            var cars=['BMW','Scoda','Porsche']
+
             return(
                 <>
-                <h1>Arrays and Objects in JavaScript</h1>
+
+                <h1>Arrays and Objects in JSX</h1>
                 {arr.map((num)=><h3>{num}</h3>)}   {/* For won't work in React JSX as it doesn't return anything, so use map function */}
                 
-                <h3>{obj.name}</h3>   {/* Object is not valid as a react child but properties can be rendered*/}  
+                <h3>{obj.name}</h3>   {/* Object is not valid as a react child but properties can be rendered*/} 
+
+                <h1>List of Cars</h1>
+                <ul>
+                    {cars.map((car,index)=>(   
+                        <li key={index}>{car}</li>
+                    ))}
+                </ul>   {/* Each child in list should have unique key */}
+
                 </>
             )
         }

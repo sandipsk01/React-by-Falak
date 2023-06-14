@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rendering Arrays and Objects</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        
+        function App(){  
+            
+            var students=[
+                {id:1,name:"Sandy",age:23,marks:50},
+                {id:2,name:"Raju",age:23,marks:90},
+                {id:3,name:"Zural",age:23,marks:70}
+            ];
+            
+            return(
+                <>
+                    <h1>Student Details</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Marks</th>
+                            </tr>
+                        </thead>
+                       
+                        <tbody>
+                        {students.map((student)=>(
+                            
+                                <tr key={student.id}>
+                                    <td>{student.name}</td>
+                                    <td>{student.age}</td>
+                                    <td>{student.marks}</td>
+                                </tr>
+                            
+                        ))}
+                        </tbody>
+                    </table>
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<App />)
+    </script>
+</body>
+</html>
