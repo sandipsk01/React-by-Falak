@@ -12,7 +12,7 @@
     <div id="root"></div>
     <script type="text/babel">
         
-        function App(){  
+        function StudentInfo(){  
             
             var students=[
                 {id:1,name:"Sandy",age:23,marks:50},
@@ -23,7 +23,7 @@
             return(
                 <>
                     <h1>Student Details</h1>
-                    <table>
+                    <table border="1px">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -47,7 +47,77 @@
                 </>
             )
         }
+        const ItemSale = () => {
+        const itemsSold = [
+          { id: 1, name: "iPhone 14", price: 1200, qty: 22 },
+          { id: 2, name: "iPad Pro", price: 800, qty: 18 },
+          { id: 3, name: "Macbook Air", price: 1500, qty: 7 },
+          { id: 4, name: "Samsung S23", price: 1100, qty: 16 },
+          { id: 5, name: "Dell Inspiron 5590", price: 1200, qty: 5 }
+        ];
+	
+        return (
+          <>
+            <h1>Record of sold items</h1>
+            <table border="1px">
+            {/* iterate over data here */}
+            <thead>
+            	<tr>
+                	<th>Id</th>
+                    <th>Name</th>
+                    <th>Selling price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+            {itemsSold.map((item)=>(
+            	<tr key={item.id}>
+                	<td>{item.id}</td>
+                    <td>{item.name}</td>
+                    <td>{item.price}</td>
+                    <td>{item.qty}</td>
+                </tr>))}
+            </tbody>
+            <tfoot>
+            	<tr>
+                	<td>Total Revenue</td>
+                    <td colSpan={3}>
+                    ${itemsSold.reduce((sum, item) => sum + item.price, 0)}
+                  </td>
+            	</tr>
+            </tfoot>
+            </table>
+          </>
+        );
+      };
 
+      function App(){
+        let studentInfo=false;
+
+        {/* Conditional Redering*/}
+        if(studentInfo){
+            return(
+                <StudentInfo />
+            )
+        }
+
+        var loggedIn=true;     {/* Conditional rendering using Ternary operator*/}
+        var fname="Optimus";
+        var lname="Primal";
+        return(
+            <>
+            {/* || operator return first truthy val or last falsy val*/}
+            <h1>Hello {loggedIn? lname || fname : "User"}!</h1>
+
+            {/* In JS only 0, "", null, undefined, false are false. 
+            && operator return first falsy val or last truthy val */}
+            {loggedIn && <p>Welcome to portal.</p>}
+                
+            
+                <ItemSale />
+            </>
+        )
+      }
         ReactDOM.createRoot(document.getElementById("root")).render(<App />)
     </script>
 </body>
