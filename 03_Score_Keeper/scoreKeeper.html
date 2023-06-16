@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score Keeper</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root" style="text-align: center;"></div>
+    <script type="text/babel">
+        let runs=0;
+        let wickets=0;
+
+        function addRuns(num){
+            runs+=num;
+            rootEllement.render(<App />)
+        }
+
+        function addWicket(){
+            wickets+=1;
+            rootEllement.render(<App />)
+        }
+
+        const App = () =>(
+            <>
+            <h1>SCORE KEEPER</h1>
+            <h3>SCORE: {runs}/{wickets}</h3>
+            <div>
+                {/*We use inline arrow functions to pass parameters to event handlers.*/}
+                <button onClick={()=>addRuns(1)}>1</button>
+                <button onClick={()=>addRuns(2)}>2</button>
+                <button onClick={()=>addRuns(3)}>3</button>
+                <button onClick={()=>addRuns(4)}>4</button>
+                <button onClick={()=>addRuns(5)}>5</button>
+                <button onClick={()=>addRuns(6)}>6</button>
+                <button onClick={addWicket}>Wicket</button>
+            </div>
+            </>
+        )
+        
+
+        const rootEllement=ReactDOM.createRoot(document.getElementById("root"));
+        rootEllement.render(<App />)
+    </script>
+</body>
+</html>
