@@ -14,21 +14,31 @@
         let runs=0;
         let wickets=0;
         let ballWiseRes=[];
-
+        let hit=0;
+        let inputRef=React.createRef();  //React.createref() to get access to any node from dom tree and to get value use inputRef.current.value * It is not depend on react= uncontrolled components.
+        
+        // function addRuns(num){
+        //     if(wickets<10){
+        //         ballWiseRes.push(num)
+        //         runs+=num;
+        //         rootEllement.render(<App />)
+        //     }
+        // }
         function addRuns(num){
-            if(wickets<10){
-                ballWiseRes.push(num)
-                runs+=num;
-                rootEllement.render(<App />)
-            }
+            hit=num
+            rootElement.render(<App />)
         }
 
+        // function addWicket(){
+        //     if(wickets<10){
+        //         ballWiseRes.push("W")
+        //         wickets+=1;
+        //         rootEllement.render(<App />)
+        //     }
+        // }
         function addWicket(){
-            if(wickets<10){
-                ballWiseRes.push("W")
-                wickets+=1;
-                rootEllement.render(<App />)
-            }
+            hit="W"
+            rootElement.render(<App />)
         }
 
         const ScoreButtons = () =>(
@@ -59,15 +69,31 @@
         )
 
         const Form = () => (
-            <form onSubmit={handleSubmit}>
-                <input />
-                <input />
+            <form onSubmit={handleSubmit}>     
+                {/* Synthetic events are a wrapper around the event object of the Real DOM. We have to call preventDefault to stop the default behavior of a Synthetic event. */}
+                <input value={hit}/>
+                <input ref={inputRef} placeholder="Add a comment"/>    {/* ref created*/}
                 <button>Submit</button>
             </form>
         )
 
         function handleSubmit(event){
             event.preventDefault();
+            if(wickets<10){
+                if(hit=="W"){
+                    wickets+=1
+                }else{
+                    runs+=hit;
+                }
+                ballWiseRes.unshift(
+                    // <span>{hit}{", "}{inputRef.current.value}</span>
+                    <span>{`${hit}, ${inputRef.current.value}`}</span>
+                );
+                hit=0;
+                inputRef.current.value="";
+                rootElement.render(<App />)
+            }  
+            
         }
 
         const App = () =>(
@@ -79,12 +105,15 @@
             <Form />
             <hr />
             {/* <Result /> */}
+            {ballWiseRes.map((res,index)=>(
+                <p key={index}>{res}</p>
+            ))}
             </>
         )
         
 
-        const rootEllement=ReactDOM.createRoot(document.getElementById("root"));
-        rootEllement.render(<App />)
+        const rootElement=ReactDOM.createRoot(document.getElementById("root"));
+        rootElement.render(<App />)
     </script>
 </body>
 </html>
