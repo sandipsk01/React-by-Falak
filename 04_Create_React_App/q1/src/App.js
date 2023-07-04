@@ -1,6 +1,8 @@
 import logo from "./logo.svg";
 import "./App.css";
 
+let a=29;
+let arr=[20,30];
 function App() {
   return (
     <div className="App">
@@ -22,5 +24,7 @@ function App() {
     </div>
   );
 }
+
+export {a, arr}; 
 
 export default App;
