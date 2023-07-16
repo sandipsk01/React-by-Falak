@@ -122,3 +122,18 @@ footer.starCount {
   text-shadow: none;
   margin: 5px;
 }
+
+/* .nav{
+  width: 100%;
+  height: 70px;
+  background-color: blue;
+  display: flex;
+  justify-content: space-between;
+} */
+
+
+/* CSS Module */
+/* xyz.module.css to export object of style implicitely, locally scoped
+and 
+import xyz from "./xyz.module.css"
+and <tag className={xyz.className}></tag>*/
