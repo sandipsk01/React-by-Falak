@@ -1,14 +1,49 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useReducer } from "react";
 
 //Blogging App using Hooks
+
+function blogsReducer(state, action){
+    switch(action.type){
+        case "ADD":
+            return [action.blog, ...state];
+        case "REMOVE":
+            return state.filter((blog,index)=>index!==action.index);
+        default:
+            return [];
+    }
+}
 export default function Blog(){
     
     // const [title, setTitle]= useState("");
     // const [content, setContent]= useState("");
 
     const [formData, setFormData]=useState({title:"",content:""})
-    const [blogs, setBlogs]=useState([]);
+
+    // const [blogs, setBlogs]=useState([]);
+
+    // const [state, dispatch] = useReducer(reducer, initialArg, init?)
+    // reducer: The reducer function that specifies how the state gets updated. It must be pure, should take the state and action as arguments, and should return the next state. State and action can be of any types.
+    // optional init: The initializer function that should return the initial state. If it’s not specified, the initial state is set to initialArg. Otherwise, the initial state is set to the result of calling init(initialArg).
+    //The dispatch function returned by useReducer lets you update the state to a different value and trigger a re-render. You need to pass the action as the only argument to the dispatch function.
+    const [blogs, dispatch]=useReducer(blogsReducer,[]);
+
     const titleRef=useRef(null);
+    // useRef is a React Hook that lets you reference a value that’s not needed for rendering.
+    // const ref = useRef(initialValue)
+    //initialValue: The value you want the ref object’s current property to be initially. It can be a value of any type. This argument is ignored after the initial render.
+    //Initially, it’s set to the initialValue you have passed. You can later set it to something else. If you pass the ref object to React as a ref attribute to a JSX node, React will set its current property.
+
+    useEffect(()=>{
+        titleRef.current.focus()
+    },[]);
+
+    useEffect(()=>{
+        if(blogs.length && blogs[0].title){
+            document.title=blogs[0].title;
+        }else{
+            document.title="No Blogs!!"
+        }
+    },[blogs])
     //Passing the synthetic event as argument to stop refreshing the page on submit
     function handleSubmit(e){
         e.preventDefault();
@@ -16,14 +51,16 @@ export default function Blog(){
         // setBlogs([{title,content},...blogs]);       //rest operator to keep whatever their already present in array
         // setTitle("");
         // setContent("");
-        setBlogs([{title:formData.title,content:formData.content},...blogs]);
+        // setBlogs([{title:formData.title,content:formData.content},...blogs]);
+        dispatch({type:"ADD",blog:{title:formData.title,content:formData.content}})
         setFormData({title:"", content:""});
         titleRef.current.focus();
         console.log({blogs})
     }
 
     function removeBlog(i){
-        setBlogs(blogs.filter((blog, index)=>i!==index))
+        // setBlogs(blogs.filter((blog, index)=>i!==index))
+        dispatch({type:"REMOVE",index:i})
     }
     return(
         <>
@@ -52,6 +89,7 @@ export default function Blog(){
                         <textarea className="input content"
                                 placeholder="Content of the Blog goes here.."
                                 value={formData.content}
+                                required
                                 onChange={(e)=>setFormData({title:formData.title,content:e.target.value})}/>
                 </Row >
 
