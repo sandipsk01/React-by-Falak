@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "../styles/ItemCard.module.css";
 import { itemContext } from "../itemContext";
+import { totalContext } from "../totalContext";
 import { useContext } from "react";
 
 function ItemCard({ id, name, price }) {
-  const {item, setItem, total, setTotal}= useContext(itemContext);   //destructured
-
+  const {item, setItem}= useContext(itemContext);   //destructured
+  const {total, setTotal}=useContext(totalContext);
   const handleAdd = () => {
     setTotal(total+price);
     setItem(item+1)
