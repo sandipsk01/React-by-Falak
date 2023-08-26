@@ -51,9 +51,12 @@ const noteSlice= createSlice({
             })
         },
         delete:(state, action)=>{
-            state.notes.slice(action.payload, 1)
+            state.notes.splice(action.payload, 1)
         }
     }
 });
 
 export const noteReducer = noteSlice.reducer;
+export const actions = noteSlice.actions;
+
+export const noteSelector= (state)=>state.noteReducer.notes;
