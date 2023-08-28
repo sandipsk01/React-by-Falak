@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-
+import { actions } from './todoReducer'
 const initialState={
     message:""
 }
@@ -12,9 +12,23 @@ const notificationSlice=createSlice({
             state.message="";
         }
     },
+    // extraReducers:{
+    //     "todo/add":(state, action)=>{
+    //         state.message="Todo is created.";
+    //     }
+    // }
+
+
+    //When extraReducers is defined as a function, it receives a builder instance that has an addCase method. This method takes an action creator and a case reducer function as parameters.
+    // extraReducers:(builder)=>{
+    //     builder.addCase(actions.add, (state, action)=>{
+    //         state.message="Todo is created";
+    //     })
+    // }
+
     extraReducers:{
-        "todo/add":(state, action)=>{
-            state.message="Todo is created.";
+        [actions.add]: (state, action)=>{
+            state.message="Todo is created";
         }
     }
 })
