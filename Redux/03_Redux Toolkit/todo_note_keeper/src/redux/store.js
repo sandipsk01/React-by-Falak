@@ -5,6 +5,7 @@
 // import { combineReducers } from "redux";  //The combineReducers function is used to combine multiple reducers into a single reducer function. It takes an object with keys representing state slices and values as the reducers that manage those state values.
 import { todoReducer } from "./reducers/todoReducer";
 import { noteReducer } from "./reducers/noteReducer";
+import { notificationReducer } from "./reducers/notificationReducer";
 import { configureStore } from "@reduxjs/toolkit";
 
 // const result = combineReducers({
@@ -19,7 +20,8 @@ import { configureStore } from "@reduxjs/toolkit";
 export const store = configureStore({
     reducer:{
         todoReducer,
-        noteReducer
+        noteReducer,
+        notificationReducer
     }
 })
 
