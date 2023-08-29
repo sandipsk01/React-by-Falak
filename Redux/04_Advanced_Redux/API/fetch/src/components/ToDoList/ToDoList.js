@@ -4,6 +4,7 @@ import { actions } from "../../redux/reducers/todoReducer";
 import { todoSelector } from "../../redux/reducers/todoReducer";
 import styles from "./ToDoList.module.css";
 import {useEffect} from "react";
+import axios from "axios";
 
 function ToDoList() {
 
@@ -13,11 +14,16 @@ function ToDoList() {
   // const todos= store.getState().todos;
 
   useEffect(() => {
-      fetch("http://localhost:4100/api/todos")
-        .then(res=>res.json())
-          .then(parsedJson=>{
-            console.log(parsedJson);
-          })
+      // fetch("http://localhost:4100/api/todos")   //by default fetch function sends get request to api
+        // .then(res=>res.json())   //used 'then' when returns promise
+        //   .then(parsedJson=>{
+        //     console.log(parsedJson);
+        //   })
+
+        //The Axios library has a get method to make HTTP GET requests to an API. It returns a promise that needs to be awaited, and the response object has a data property containing parsed JSON.
+      axios.get("http://localhost:4100/api/todos")
+        .then(res=>   //used 'then' when returns promise
+          console.log(res.data))
   }, []);
 
 
