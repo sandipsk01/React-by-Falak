@@ -1,3 +1,4 @@
+// Error Boundary has static getDerivedStateFromError(error), componentDidCatch(error, info)
 import { Component } from "react";
 
 class ErrorBoundary extends Component{
